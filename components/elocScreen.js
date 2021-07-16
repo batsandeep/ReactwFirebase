@@ -20,7 +20,7 @@ function FindLoc({ route }) {
         });
         const response = await Oauth.post('/security/oauth/token?grant_type=client_credentials&client_id=33OkryzDZsJD007QlbSm5D5kuQ1M3P-wyyobauMAQ8khmvhz9j_wNGW9hzvqqz02MyYiCbcxAcm4P5zVbSP2Jg==&client_secret=lrFxI-iSEg9jK3WRAVlYQ8uwgDlAThYYnsckiLHPJFKf6JXnZk8yT-lzrESPHcMkKYgDDHA8fMCkuD2ai8KrI_hi18zb8PZY'
         );
-        // console.log(response.data);
+        console.log(response.data);
         const token = response.data.access_token;
         const res = await nearby.get(url, {
             headers: {
