@@ -1,0 +1,35 @@
+// import axios from 'axios';
+// import { NavigationContainer } from '@react-navigation/native';
+// import { createStackNavigator } from '@react-navigation/stack';
+// import 'react-native-gesture-handler';
+
+// function findLoc({ text }) {
+//   const [data, setData] = useState([]);
+//   var url = 'https://explore.mapmyindia.com/apis/O2O/entity/' + text;
+
+//   const Oauth = axios.create({
+//     baseURL: 'https://outpost.mapmyindia.com/api'
+//   });
+//   const nearby = axios.create({
+//     baseURL: url
+//   });
+//   const response = Oauth.post('/security/oauth/token?grant_type=client_credentials&client_id=33OkryzDZsJavqHR-9JLPdtXoLJs4ppd7LfghLCG7TLxoQAIP3RO3Fj2zc4nbARw0iKZNzLWkzowno3uhtJqRI8RQwsvbkqm&client_secret=lrFxI-iSEg_zlh1el1FCreckGFOMcteDZXY8SmiqRNnPsN5TaSH5-yAuKbYtYgkOku8B_yAMZ1Yvsa8pfRUvc3-y0DafuJl_FXCoq8pLuJU='
+//   );
+//   const token = response.data.access_token;
+//   const res = nearby.get('url', {
+//     params: {
+//       eLoc: text
+//     }, headers: {
+//       Authorization: `bearer ${token}`
+//     }
+//   });
+//   const ObjectTest = res.data;
+//   setData(ObjectTest);
+
+//   return (
+//     <View style={styles.container}>
+//       <Text style={styles.sectionTitle}> {Data.name} </Text>
+//     </View>
+//   );
+// }
+// export default findLoc

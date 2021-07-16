@@ -1,0 +1,121 @@
+  // getPoi = async () => {
+  //   const usersCollection = await firestore().collection('POI').doc('5usBDmKafej9AYEKpdbr').get();
+  //   console.log(usersCollection);
+  // }
+  // calSize = async () => {
+  //   const usersC = await firestore().collection('POI').get().then(querySnapshot => {
+  //     console.log('Total users: ', querySnapshot.size);
+  //     querySnapshot.forEach(documentSnapshot => {
+  //       console.log('Place ID: ', documentSnapshot.id, documentSnapshot.data());
+  //     });
+  //   });
+  // }
+  // getAns = async () => {
+  //   const usersC = await firestore().collection('POI').where('Category', '==', 'Temple').get();
+  //   console.log(usersC);
+  // }
+  // getPoi = async () => {
+  //   const usersCollection = await firestore().collection('POI').where('Alt_name', '==', 'Char Dham Yatra,12 Jyotirlingas').get();
+  //   console.log(usersCollection);
+  // }
+
+  import React, { Component, useState, useEffect} from 'react';
+import { Text, StyleSheet, Button, View, TextInput, TouchableOpacity } from 'react-native';
+import firestore from "@react-native-firebase/firestore"
+
+export default function App() {
+  const [inp, setinp] = useState();
+  const [users, setUsers] = useState([]);
+  const getAns = () => {
+      const subscriber = firestore()
+        .collection('POI')
+        .where('Category', '==', 'Temple')
+        .onSnapshot(querySnapshot => {
+          const users = [];
+          querySnapshot.forEach(documentSnapshot => {
+            users.push({
+              ...documentSnapshot.data(),
+              key: documentSnapshot.id,
+            });
+          });
+          setUsers(users);
+        });
+        console.log(users);
+      return () => subscriber();
+  }
+
+      <TextInput style={styles.input} placeholder={'Enter Keyword'} onChangeText={text => setinpkw(text)}/>
+  return (
+    <View style={styles.container}>
+      <Text style={styles.sectionTitle}> DATA </Text>
+      <View style={styles.inputView} >
+        <TextInput style={styles.input} placeholder={'Enter Keyword'} onChangeText={text => setinp(text)} />
+      </View>
+      <TouchableOpacity style={styles.loginBtn} onPress={() => getAns()}>
+        <Text style={styles.addText}>GO</Text>
+      </TouchableOpacity>
+    </View>
+  );
+}
+.where('Deity - Avatar', 'in', ['Shiv Ji'])
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: "center",
+    backgroundColor: '#003f5c',
+  },
+  listItem: {
+    marginHorizontal: 40,
+    marginVertical: 10,
+    paddingHorizontal: 80,
+    paddingVertical: 20,
+    backgroundColor: "#FFF",
+    width: "150%",
+    flex: 1,
+    alignSelf: "center",
+    flexDirection: "row",
+    borderRadius: 5
+  },
+  sectionTitle: {
+    fontWeight: "bold",
+    fontSize: 50,
+    color: "#fb5b5a",
+    marginBottom: 30,
+    marginTop: 10
+  },
+  inputView: {
+    width: "80%",
+    backgroundColor: "#465881",
+    borderRadius: 25,
+    height: 50,
+    marginBottom: 20,
+    justifyContent: "center",
+    padding: 20
+  },
+  input: {
+    height: 50,
+    color: "white"
+  },
+  addWrapper: {
+    marginTop: 5,
+    width: 80,
+    height: 40,
+    backgroundColor: '#FFF',
+    borderRadius: 30,
+    borderColor: '#C0C0C0',
+    alignItems: 'center',
+    borderWidth: 1,
+    justifyContent: 'center',
+  },
+  loginBtn: {
+    width: "80%",
+    backgroundColor: "#fb5b5a",
+    borderRadius: 25,
+    height: 50,
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 10,
+    marginBottom: 10
+  },
+  addText: {},
+});
